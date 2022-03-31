@@ -4,9 +4,6 @@ pragma solidity >=0.5.0 <0.7.0;
 import "./Ownable.sol";
 
 
-/**
- * 地址Resolver注册表
- */
 contract Resolver is Ownable {
     mapping(bytes32 => address) private _registries;
 

@@ -10,20 +10,20 @@ import "../common/MixinResolver.sol";
 contract PrivatePlacement is WhitelistedRole, Pausable, MixinResolver {
     using SafeMath for uint256;
 
-    mapping(uint256 => Order) private _orders;                      // 订单
-    mapping(address => uint256) public _buyers;                     // 代理地址对应订单号，申购完成：1，不是代理：0，订单撤销：2
-    uint256 private _counter = 2;                                   // 已挂申购订单数量
-    uint256 public totalSellableDeposits;                           // 系统当前总待申购金额
-    uint256 public totalFunds;                                      // 系统当前保证金总额
-    mapping(address => uint256) public totalDepositedBalance;       // 用户总共卖出金额
-    mapping(address => uint256) public totalPurchasedBalance;       // 代理总共买到金额
+    mapping(uint256 => Order) private _orders;
+    mapping(address => uint256) public _buyers;
+    uint256 private _counter = 2;
+    uint256 public totalSellableDeposits;
+    uint256 public totalFunds;
+    mapping(address => uint256) public totalDepositedBalance;
+    mapping(address => uint256) public totalPurchasedBalance;
 
     struct Order {
-        address seller;                                             // 卖方
-        address buyer;                                              // 买方
-        uint256 lot;                                                // 申购数量(KPT)
-        uint256 fund;                                               // 保证金(KPT)
-        uint256 pay;                                                // 支付数量(USDT)
+        address seller;
+        address buyer;
+        uint256 lot;
+        uint256 fund;
+        uint256 pay;
     }
 
     constructor() public {
@@ -126,9 +126,9 @@ contract PrivatePlacement is WhitelistedRole, Pausable, MixinResolver {
         emit WithdrawFund(account, amount);
     }
 
-    event Queued(uint256 indexed id, address indexed seller, address indexed buyer, uint256 lot, uint256 fund, uint256 pay);    // 单号，买家地址，卖家地址，购买数量，保证金，支付数量
-    event Filled(uint256 indexed id, address indexed seller, address indexed buyer, uint256 lot, uint256 fund, uint256 pay);    // 单号，买家地址，卖家地址，购买数量，保证金，支付数量
-    event Cancel(uint256 indexed id, address indexed seller, address indexed buyer, uint256 lot, uint256 fund, uint256 pay);    // 单号，买家地址，卖家地址，购买数量，保证金，支付数量
-    event WithdrawFund(address indexed account, uint256 indexed amount);    // 地址，数量
+    event Queued(uint256 indexed id, address indexed seller, address indexed buyer, uint256 lot, uint256 fund, uint256 pay);
+    event Filled(uint256 indexed id, address indexed seller, address indexed buyer, uint256 lot, uint256 fund, uint256 pay);
+    event Cancel(uint256 indexed id, address indexed seller, address indexed buyer, uint256 lot, uint256 fund, uint256 pay);
+    event WithdrawFund(address indexed account, uint256 indexed amount);
 
 }

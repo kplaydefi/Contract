@@ -19,9 +19,6 @@ import "../interface/IProxyFee.sol";
 
 
 
-/**
-* 系统内的ENS服务
-*/
 contract MixinResolver is AddressResolver {
 
     function kpToken() public view returns (IKPToken) {

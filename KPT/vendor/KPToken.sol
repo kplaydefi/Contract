@@ -9,7 +9,7 @@ import "../common/MixinResolver.sol";
 contract KPToken is WhitelistedRole, ERC20, MixinResolver {
     
     constructor() ERC20("KPT", "KPT", 18) public {
-        _mint(msg.sender, 2000000 * 1e18);//初始发行量
+        _mint(msg.sender, 2000000 * 1e18);
         addPauser(msg.sender);
         pause();
         addWhitelisted(msg.sender);
