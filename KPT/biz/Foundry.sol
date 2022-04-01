@@ -504,7 +504,6 @@ contract Foundry is MixinResolver, ExternStorage {
         _internalBurnCombos(caller, amount);
     }
 
-    /** 销毁至债务清零 */
     function burnAllCombos()
         external
         optionalProxy
