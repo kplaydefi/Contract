@@ -33,8 +33,6 @@ contract ProxyFee is MixinResolver, WhitelistedRole {
     function proxyRecharge(uint256 amount) public {
         require(relationship().isProxy(msg.sender), "ProxyFee: caller is not the proxy");
         require(amount > 0 , "ProxyFee: amount is zero");
-        //授权校验?
-        //require(kusd().allowance(msg.sender, address(this)) >= amount, "ProxyFee: allowance not enough");
 
         kusd().transferFrom(msg.sender, address(this), amount);
         _deposits[msg.sender] = _deposits[msg.sender] + amount;
@@ -46,8 +44,6 @@ contract ProxyFee is MixinResolver, WhitelistedRole {
     function rechargeTo(address proxy, uint256 amount) public onlyOwner {
         require(relationship().isProxy(proxy), "ProxyFee: caller is not the proxy");
         require(amount > 0 , "ProxyFee: amount is zero");
-        //授权校验?
-        //require(kusd().allowance(msg.sender, address(this)) >= amount, "ProxyFee: allowance not enough");
 
         kusd().transferFrom(msg.sender, address(this), amount);
         _deposits[proxy] = _deposits[proxy] + amount;
